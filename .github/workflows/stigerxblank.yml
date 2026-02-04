@@ -1,36 +1,222 @@
-# This is a basic workflow to help you get started with Actions
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 Year Anniversary Surprise</title>
+<style>
+body{
+  margin:0; padding:0; min-height:100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow:hidden; position:relative; background:#000;
+}
 
-name: CI
+/* Princess background floating */
+body::before{
+  content:"";
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background: url('https://i.postimg.cc/PJGGrdgw/images.jpg') no-repeat center center/cover;
+  z-index:-1;
+  animation: floatBobBg 5s infinite alternate;
+}
+@keyframes floatBobBg{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-5px);}
+  100%{transform:translateY(0);}
+}
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+/* Floating/Shaking Text */
+.floating-text{
+  position:absolute; top:20px; left:50%; transform:translateX(-50%);
+  font-size:32px; color:white; font-weight:bold;
+  animation: float 1s infinite alternate;
+  text-shadow: 2px 2px 6px #000;
+}
+@keyframes float{
+  0%{transform:translate(-50%,0);}
+  50%{transform:translate(-50%,-15px);}
+  100%{transform:translate(-50%,0);}
+}
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+/* Flynn Image dancing */
+#flynn{
+  position:absolute; bottom:30px; left:20px; width:180px; z-index:2;
+  animation: floatBob 2s infinite alternate;
+}
+@keyframes floatBob{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+  100%{transform:translateY(0);}
+}
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+/* Mail Button */
+.mail-btn{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  padding:22px 32px; font-size:20px; border:none; border-radius:14px; cursor:pointer;
+  background:#ff6b81; color:white; box-shadow:0 6px 15px rgba(0,0,0,.3); z-index:2;
+  animation: sparkle 1.2s infinite;
+}
+.mail-btn:hover, .mail-btn:active {animation: shake 0.7s, sparkle 1.2s infinite;}
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+.mail-msg{
+  position:absolute; top:calc(50% + 90px); left:50%; transform:translateX(-50%);
+  background:rgba(255,255,255,.95); padding:14px 18px; border-radius:14px;
+  display:none; font-size:18px; z-index:3; text-align:center; font-weight:bold;
+  box-shadow:0 5px 12px rgba(0,0,0,.3);
+  animation: bounce 0.5s;
+}
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+/* Egg */
+.egg-container{
+  position:absolute; bottom:20px; display:flex; flex-direction:column; align-items:center; z-index:2;
+}
+.egg{
+  width:160px; height:200px; background:radial-gradient(circle at 50% 30%, #fff5db, #fddf80);
+  border-radius:60% 60% 50% 50%; border:3px solid #ffde7d;
+  display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:bold;
+  cursor:pointer; animation: shake 1s infinite, sparkle 1.5s infinite;
+}
+.egg:hover, .egg:active {animation: shake 0.7s, sparkle 1.5s infinite;}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+.egg-instruction{
+  margin-top:6px; font-size:14px; color:white; font-weight:bold;
+  animation: shake 1s infinite; text-shadow:1px 1px 4px #000;
+}
+
+/* Animations */
+@keyframes shake{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-6px);}
+  50%{transform:translateX(6px);}
+  75%{transform:translateX(-6px);}
+  100%{transform:translateX(0);}
+}
+@keyframes bounce{
+  0%{transform:translateY(-15px);}
+  50%{transform:translateY(8px);}
+  100%{transform:translateY(0);}
+}
+@keyframes sparkle{
+  0%,100%{transform: scale(1);}
+  50%{transform: scale(1.08);}
+}
+
+/* Popup Congrats Message */
+.animated-msg{
+  position:fixed; left:50%; top:40%; transform:translateX(-50%);
+  background:rgba(255,255,255,.95); padding:20px 24px; border-radius:14px;
+  font-size:26px; font-weight:bold; opacity:0; z-index:3; text-align:center;
+  box-shadow:0 6px 15px rgba(0,0,0,.3);
+  animation:fadein 0.7s forwards;
+}
+@keyframes fadein{
+  0%{opacity:0; transform:translateY(-20px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+
+/* Heart Rain + Sparkles */
+.heart, .sparkle{
+  position:absolute; animation:fall 3s linear forwards; pointer-events:none; z-index:1;
+}
+@keyframes fall{0%{top:-30px; opacity:1;} 100%{top:100vh; opacity:0;}}
+</style>
+</head>
+<body>
+
+<div class="floating-text">የኔ ውብ ሚስቴ ነቡ😍</div>
+<img id="flynn" src="YOUR_FLYNN_DIRECT_LINK" alt="Flynn">
+
+<!-- Mail -->
+<button class="mail-btn" onclick="mailTap()">📧 Mail</button>
+<div id="mail-msg" class="mail-msg"></div>
+
+<!-- Egg -->
+<div class="egg-container">
+  <div class="egg" onclick="eggTap()">🥚</div>
+  <div class="egg-instruction">ንግስቲት ሆይ እባኮትን ይሄን እንቁላል 3 ጊዜ ይጫኑ</div>
+</div>
+
+<script>
+/* Mail Messages */
+let mailMessages=[
+  "ከፒዛ በላይ አፈቅርሻለሁ 🍕🙄",
+  "ሚስኪን ወደድሽም ጠላሽም እኔን ነው ምታገቢው😏🤨",
+  "26 መስሎኝ ነበር ፍቅርሽ ያጦዛል እዴ?👀"
+];
+let mailIndex=0;
+function mailTap(){
+  if(mailIndex<mailMessages.length){
+    let msgDiv=document.getElementById("mail-msg");
+    msgDiv.innerText=mailMessages[mailIndex];
+    msgDiv.style.display="block";
+    msgDiv.style.animation='bounce 0.5s';
+    
+    for(let i=0;i<5;i++){
+      let heart=document.createElement("div");
+      heart.className="heart";
+      heart.style.left=(msgDiv.offsetLeft + Math.random()*msgDiv.offsetWidth)+"px";
+      heart.style.top=(msgDiv.offsetTop + Math.random()*msgDiv.offsetHeight/2)+"px";
+      heart.style.fontSize=(12+Math.random()*8)+"px";
+      heart.innerText="💖";
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),4000);
+    }
+
+    setTimeout(()=>{msgDiv.style.display="none"},4000);
+    mailIndex++;
+  } else {mailIndex=0;}
+}
+
+/* Egg Tap */
+let eggTapCount=0;
+function eggTap(){
+  eggTapCount++;
+  if(eggTapCount>=3){
+    let msg=document.createElement("div");
+    msg.className="animated-msg";
+    msg.innerText="እንኳን ደስ አለሽ ጤነኛና የመጨረሻሽ የፍቅር አጋር አግኝተሻል👏🤩✨🥳🎉";
+    document.body.appendChild(msg);
+    setTimeout(()=>msg.remove(),4000);
+
+    for(let i=0;i<30;i++){
+      let conf=document.createElement("div");
+      conf.className="heart";
+      conf.style.left=Math.random()*100+"%";
+      conf.style.fontSize=(18+Math.random()*10)+"px";
+      conf.innerText="💖✨";
+      document.body.appendChild(conf);
+      setTimeout(()=>conf.remove(),3000);
+    }
+
+    eggTapCount=0;
+  }
+}
+
+/* Continuous Heart Rain */
+setInterval(()=>{
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.style.left=Math.random()*100+"%";
+  heart.style.fontSize=(16+Math.random()*12)+"px";
+  heart.innerText="💖";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},400);
+
+/* Random Sparkles Around Egg & Mail */
+setInterval(()=>{
+  const elements=[document.querySelector('.egg'), document.querySelector('.mail-btn')];
+  elements.forEach(el=>{
+    let sparkle=document.createElement("div");
+    sparkle.className="sparkle";
+    sparkle.style.left=(el.offsetLeft + Math.random()*el.offsetWidth)+"px";
+    sparkle.style.top=(el.offsetTop + Math.random()*el.offsetHeight/2)+"px";
+    sparkle.style.fontSize=(10+Math.random()*12)+"px";
+    sparkle.innerText="✨";
+    document.body.appendChild(sparkle);
+    setTimeout(()=>sparkle.remove(),1500);
+  });
+},300);
+</script>
+</body>
+</html>
